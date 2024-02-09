@@ -1,28 +1,31 @@
+use std::ops::Sub;
+
 mod rot13 {
     //! https://www.codewars.com/kata/530e15517bc88ac656000716/train/rust
     fn rot13(message: &str) -> String {
+        const fn rot13_process(ch: char) -> char {
+            let offset = match ch.is_ascii_lowercase() {
+                true => 97,
+                false => 65,
+            };
+            ((ch as u8 - offset + 13) % 26 + offset) as char
+        }
+
+        let mut result = String::with_capacity(message.len());
         for ch in message.chars() {
             if !ch.is_ascii_alphabetic() {
+                result.push(ch);
                 continue;
             }
-            // convert char to index in alphabet
-            // if ch.is_ascii_lowercase() {
-            //     let index = rot13_process(ch);
-            //     dbg!(index as char);
-            // } else {
-            //     let index = ((ch as u8 + 13) % 26) as char;
-            //     dbg!(index as char);
-            // }
-
-            let index = rot13_process(ch);
-            dbg!(index as char);
+            let result_ch = rot13_process(ch);
+            result.push(result_ch);
         }
-        todo!()
+        result
     }
 
-    const fn rot13_process(ch: char) -> char {
-        ((ch as u8 + 13) % 26) as char
-    }
+    // const fn rot13_process(ch: char) -> char {
+    //     ((ch as u8 + 13) % 26) as char
+    // }
 
     #[cfg(test)]
     mod tests {
@@ -44,5 +47,23 @@ mod rot13 {
 
 #[test]
 fn test_char_to_index() {
-    fn char
+    fn rot13(ch: char) -> char {
+        let mut ch = ch as u8;
+        let offset = if ch.is_ascii_lowercase() { 97 } else { 65 };
+        ch -= offset;
+        ch += 13;
+        ch %= 26;
+        ch += offset;
+
+        dbg!(ch as char)
+    }
+
+    rot13('t');
+    rot13('e');
+    rot13('s');
+    rot13('t');
+}
+
+pub const fn function<T: Copy, const F: usize>(a: T) -> [T; F] {
+    [a; F]
 }
