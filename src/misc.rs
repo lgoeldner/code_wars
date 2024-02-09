@@ -12,24 +12,25 @@ pub fn odd_or_even(numbers: Vec<i32>) -> String {
 
 /// https://www.codewars.com/kata/541c8630095125aba6000c00/train/rust
 pub fn digital_root(n: i64) -> i64 {
+    fn get_digits(num: u64) -> Vec<u64> {
+        num.to_string()
+            .chars()
+            .map(|ch| ch.to_digit(10).unwrap() as u64)
+            .collect()
+    }
+
+    fn root_sum(numbers: Vec<u64>) -> u64 {
+        if numbers.len() == 1 {
+            return numbers[0];
+        }
+
+        let digits_vec = dbg!(get_digits(numbers.iter().sum()));
+        root_sum(digits_vec)
+    }
+
     root_sum(get_digits(n.try_into().unwrap())) as i64
 }
 
-fn get_digits(num: u64) -> Vec<u64> {
-    num.to_string()
-        .chars()
-        .map(|ch| ch.to_digit(10).unwrap() as u64)
-        .collect()
-}
-
-fn root_sum(numbers: Vec<u64>) -> u64 {
-    if numbers.len() == 1 {
-        return numbers[0];
-    }
-
-    let digits_vec = dbg!(get_digits(numbers.iter().sum()));
-    root_sum(digits_vec)
-}
 
 #[test]
 fn test_digital_root() {
