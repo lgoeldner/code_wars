@@ -1,12 +1,12 @@
 #![allow(unused)]
 
+mod array_diff;
 mod highest_scoring_word;
 mod human_readable_time;
-mod array_diff;
-mod valid_paren;
 mod misc;
 mod more;
 mod unique_in_order;
+mod valid_paren;
 
 /// https://www.codewars.com/kata/5949481f86420f59480000e7/train/rust
 fn odd_or_even(numbers: Vec<i32>) -> String {
@@ -16,5 +16,3 @@ fn odd_or_even(numbers: Vec<i32>) -> String {
         _ => panic!("this doesn't happen!"),
     }
 }
-
-
