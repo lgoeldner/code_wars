@@ -9,6 +9,7 @@ mod unique_in_order;
 mod valid_paren;
 mod range_extraction;
 mod prime_iter;
+mod leetcode;
 
 /// https://www.codewars.com/kata/5949481f86420f59480000e7/train/rust
 fn odd_or_even(numbers: Vec<i32>) -> String {
